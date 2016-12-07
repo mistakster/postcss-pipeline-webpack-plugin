@@ -1,32 +1,40 @@
 {
-  "name": "postcss-pipeline-webpack-plugin",
-  "version": "0.0.1",
-  "description": "A webpack plugin to process generated assets with PostCSS pipeline",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-	  "webpack",
-	  "plugin",
-	  "postcss",
-	  "pipeline",
-	  "critical",
-	  "minification"
-  ],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "postcss": "^5.0.0",
-    "webpack-sources": "^0.1.3"
-  },
-  "devDependencies": {
-    "css-loader": "^0.26.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "postcss-critical-split": "^2.3.1",
-    "postcss-csso": "^1.1.2",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
-    "webpack-sources": "^0.1.3"
-  }
+	"name": "postcss-pipeline-webpack-plugin",
+	"version": "0.0.1",
+	"description": "A webpack plugin to process generated assets with PostCSS pipeline",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"webpack",
+		"plugin",
+		"postcss",
+		"pipeline",
+		"critical",
+		"minification"
+	],
+	"author": {
+		"name": "Vladimir Kuznetsov",
+		"email": "mistakster@gmail.com",
+		"url": "https://noteskeeper.ru/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mistakster/postcss-pipeline-webpack-plugin.git"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"postcss": "^5.0.0",
+		"webpack-sources": "^0.1.3"
+	},
+	"devDependencies": {
+		"css-loader": "^0.26.1",
+		"extract-text-webpack-plugin": "^1.0.1",
+		"postcss-critical-split": "^2.3.1",
+		"postcss-csso": "^1.1.2",
+		"style-loader": "^0.13.1",
+		"webpack": "^1.13.3",
+		"webpack-sources": "^0.1.3"
+	}
 }
