@@ -1,0 +1,50 @@
+/* critical:start */
+header{
+	background-color: #1d1d1d;
+	font-size: 2em;
+}
+
+.aside {
+	text-decoration: underline;
+}
+
+/* critical:end */
+
+p {
+	font-size: 14px;
+}
+
+li {
+	float: left;
+	/* critical:start */
+	color: red;
+	/* critical:end */
+}
+
+footer{
+	background-color: #1d1d1d;
+	font-size: 1.1em;
+}
+
+a[rel=external]:before{
+	content: '[!]';
+	/* critical */
+}
+
+/* critical:start */
+@media screen and (min-width: 400px) {
+	footer {
+		padding: 50px;
+	}
+}
+/* critical:end */
+
+@media screen and (min-width: 1400px) {
+	header {
+		height: 300px;
+		/* critical:start */
+		background-color: #FF0066;
+		font-size: 3em;
+		/* critical:end */
+	}
+}
