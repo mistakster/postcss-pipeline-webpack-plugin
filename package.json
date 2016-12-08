@@ -24,6 +24,10 @@
     "url": "https://github.com/mistakster/postcss-pipeline-webpack-plugin.git"
   },
   "license": "ISC",
+  "engines": {
+    "node": ">=4.0.0",
+    "npm": "^3.0.0"
+  },
   "dependencies": {
     "postcss": "^5.0.0",
     "webpack-sources": "^0.1.3"
