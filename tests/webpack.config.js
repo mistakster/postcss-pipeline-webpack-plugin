@@ -37,7 +37,10 @@ module.exports = {
         csso({
           restructure: false
         })
-      ]
+      ],
+      map: {
+        inline: false
+      }
     })
   ]
 };
