@@ -1,4 +1,5 @@
 # IDE files
+.editorconfig
 .idea
 *.iml
 
