@@ -18,7 +18,7 @@ function readFile(name) {
 }
 
 function getFixture() {
-  return readFile('./test/fixtures/index.css');
+  return readFile('./test/fixtures/styles.css');
 }
 
 describe('PostCss Pipeline Webpack Plugin', function () {
@@ -29,7 +29,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
         return plugin.generate({
           assets: {
-            './index.css': source
+            './styles.css': source
           }
         });
       })
@@ -37,8 +37,8 @@ describe('PostCss Pipeline Webpack Plugin', function () {
         const keys = Object.keys(compilation.assets);
 
         assert.deepStrictEqual(keys, [
-          './index.css',
-          './index.processed.css'
+          './styles.css',
+          './styles.processed.css'
         ]);
 
         assert.strictEqual(
@@ -56,15 +56,15 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     return plugin
       .generate({
         assets: {
-          './index.css': new RawSource('')
+          './styles.css': new RawSource('')
         }
       })
       .then(compilation => {
         const keys = Object.keys(compilation.assets);
 
         assert.deepStrictEqual(keys, [
-          './index.css',
-          './index.min.css'
+          './styles.css',
+          './styles.min.css'
         ]);
       });
   });
@@ -77,8 +77,8 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     return plugin
       .generate({
         assets: {
-          './index.js': new RawSource(''),
-          './index.css': new RawSource(''),
+          './styles.js': new RawSource(''),
+          './styles.css': new RawSource(''),
           './foobar.css': new RawSource('')
         }
       })
@@ -86,8 +86,8 @@ describe('PostCss Pipeline Webpack Plugin', function () {
         const keys = Object.keys(compilation.assets);
 
         assert.deepStrictEqual(keys, [
-          './index.js',
-          './index.css',
+          './styles.js',
+          './styles.css',
           './foobar.css',
           './foobar.processed.css'
         ]);
@@ -104,21 +104,21 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     return plugin
       .generate({
         assets: {
-          './index.css': new RawSource('')
+          './styles.css': new RawSource('')
         }
       })
       .then(compilation => {
         const keys = Object.keys(compilation.assets);
 
         assert.deepStrictEqual(keys, [
-          './index.css',
-          './index.processed.css',
-          './index.processed.css.map'
+          './styles.css',
+          './styles.processed.css',
+          './styles.processed.css.map'
         ]);
 
         assert.strictEqual(
           compilation.assets[keys[1]].source().toString(),
-          '\n/*# sourceMappingURL=index.processed.css.map */'
+          '\n/*# sourceMappingURL=styles.processed.css.map */'
         );
       });
   });
@@ -127,7 +127,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     return getFixture()
       .then(source => ({
         assets: {
-          './index.css': source
+          './styles.css': source
         }
       }))
       .then(compilation => {
@@ -161,42 +161,32 @@ describe('PostCss Pipeline Webpack Plugin', function () {
         const keys = Object.keys(compilation.assets);
 
         assert.deepStrictEqual(keys, [
-          './index.css',
-          './index.critical.css',
-          './index.min.css',
-          './index.min.css.map',
-          './index.critical.min.css',
-          './index.critical.min.css.map',
+          './styles.css',
+          './styles.critical.css',
+          './styles.min.css',
+          './styles.min.css.map',
+          './styles.critical.min.css',
+          './styles.critical.min.css.map',
         ]);
 
         const fixtures = [
-          './test/fixtures/index.css',
-          './test/fixtures/index.critical.css',
-          './test/fixtures/index.min.css',
-          './test/fixtures/index.critical.min.css'
+          './test/fixtures/styles.css',
+          './test/fixtures/styles.critical.css',
+          './test/fixtures/styles.min.css',
+          './test/fixtures/styles.min.css.map',
+          './test/fixtures/styles.critical.min.css',
+          './test/fixtures/styles.critical.min.css.map',
         ];
 
         return Promise.all(fixtures.map(readFile))
           .then(files => {
-            assert.strictEqual(
-              compilation.assets[keys[0]].source().toString().replace(/\r\n/g, '\n'),
-              files[0].source().toString().replace(/\r\n/g, '\n')
-            );
-
-            assert.strictEqual(
-              compilation.assets[keys[1]].source().toString().replace(/\r\n/g, '\n'),
-              files[1].source().toString().replace(/\r\n/g, '\n')
-            );
-
-            assert.strictEqual(
-              compilation.assets[keys[2]].source().toString().replace(/\r\n/g, '\n'),
-              files[2].source().toString().replace(/\r\n/g, '\n')
-            );
-
-            assert.strictEqual(
-              compilation.assets[keys[4]].source().toString().replace(/\r\n/g, '\n'),
-              files[3].source().toString().replace(/\r\n/g, '\n')
-            );
+            files.forEach((file, index) => {
+              assert.strictEqual(
+                compilation.assets[keys[index]].source().toString(),
+                files[index].source().toString(),
+                fixtures[index]
+              );
+            });
           });
       });
   });
