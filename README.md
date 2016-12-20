@@ -133,6 +133,8 @@ styles.critical.min.css.map
 
 As you can see, webpack generates artifacts in one pass. 
 
+See full [webpack.config.js](./examples/webpack.config.js) for more details.
+
 ## Change log
 
 ### 1.0.0
