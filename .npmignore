@@ -4,4 +4,8 @@
 *.iml
 
 # Test files
-tests
+test
+examples
+
+# CI Configuration
+.travis.yml
