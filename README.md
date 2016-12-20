@@ -63,7 +63,7 @@ module.exports = {
 
 ## Advanced techniques
 
-For example, you may want to process your styles with [postcss-critical-css](postcss-critical-css) plugin.
+For example, you may want to process your styles with [postcss-critical-css] plugin.
 It generates an additional file, which contains only styles between start- and stop-tags.
 You can’t use optimize generated styles before the plugin because minification removes all comments.
 So, you have to minify “all” and “critical” parts separately.
