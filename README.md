@@ -137,7 +137,7 @@ As you can see, webpack generates artifacts in one pass.
 
 ### 1.0.0
 
-> 2015-12-20
+> 2016-12-20
 
 - initial release
 
