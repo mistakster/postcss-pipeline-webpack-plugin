@@ -109,27 +109,27 @@ module.exports = {
 
 1) Webpack extracts all CSS into
 
-    ```text
-    styles.css
-    ```
+```text
+styles.css
+```
    
 2) PostCSS generates critical CSS into
 
-    ```text
-    styles.css
-    styles.critical.css
-    ```
+```text
+styles.css
+styles.critical.css
+```
        
 3) PostCSS optimize both files with [csso] and create relevant SourceMaps. 
 
-    ```text
-    styles.css
-    styles.critical.css
-    styles.min.css
-    styles.min.css.map
-    styles.critical.min.css
-    styles.critical.min.css.map
-    ```
+```text
+styles.css
+styles.critical.css
+styles.min.css
+styles.min.css.map
+styles.critical.min.css
+styles.critical.min.css.map
+```
 
 As you can see, webpack generates artifacts in one pass. 
 
