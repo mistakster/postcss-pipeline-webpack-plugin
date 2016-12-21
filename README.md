@@ -107,20 +107,20 @@ module.exports = {
 };
 ```
 
-1) Webpack extracts all CSS into
+1) Webpack extracts all CSS into:
 
 ```text
 styles.css
 ```
-   
-2) PostCSS generates critical CSS into
+
+2) PostCSS generates critical CSS into `styles.critical.css`. So, you get:
 
 ```text
 styles.css
 styles.critical.css
 ```
-       
-3) PostCSS optimize both files with [csso] and create relevant SourceMaps. 
+
+3) PostCSS optimize both files with [csso] and create relevant SourceMaps:
 
 ```text
 styles.css
