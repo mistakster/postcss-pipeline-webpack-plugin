@@ -69,6 +69,26 @@ describe('PostCss Pipeline Webpack Plugin', function () {
       });
   });
 
+  it('should generate properly named files when sufix is undefined', function () {
+    const plugin = new PostCssPipelineWebpackPlugin({
+      suffix: undefined
+    });
+
+    return plugin
+      .generate({
+        assets: {
+          './styles.css': new RawSource('')
+        }
+      })
+      .then(compilation => {
+        const keys = Object.keys(compilation.assets);
+
+        assert.deepStrictEqual(keys, [
+          './styles.css'
+        ]);
+      });
+  });
+
   it('should filter files to process', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
       predicate: name => /foobar.css$/.test(name)
