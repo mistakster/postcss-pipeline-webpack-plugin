@@ -61,7 +61,7 @@ const baseConfig = {
   ]
 };
 
-function buildConfig(plugins = [], options) {
+function buildConfig(plugins, options) {
   return Object.assign({}, baseConfig, {
     plugins: baseConfig.plugins.concat(plugins)
   }, options);
