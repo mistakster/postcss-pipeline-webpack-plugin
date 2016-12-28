@@ -69,7 +69,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
       });
   });
 
-  it('should generate properly named files when sufix is undefined', function () {
+  it('should generate properly named files when suffix is undefined', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
       suffix: undefined
     });
