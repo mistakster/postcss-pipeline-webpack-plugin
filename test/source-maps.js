@@ -177,7 +177,7 @@ describe('Integration test', function () {
       });
   });
 
-  it('should deel with inline maps to the plugin', function () {
+  it('should deal with inline maps', function () {
     const config = buildConfig([
       new PostCssPipelineWebpackPlugin({
         suffix: 'critical',
