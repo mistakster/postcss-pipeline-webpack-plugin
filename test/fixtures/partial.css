@@ -1,0 +1,10 @@
+.widget,
+.widget *,
+.widget *::before,
+.widget *::after {
+  box-sizing: border-box;
+}
+
+.widget img {
+  border: 0 none;
+}
