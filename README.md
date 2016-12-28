@@ -137,12 +137,18 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
 
+### 1.2.0
+
+> 2016-12-28
+
+- *[fix]* added previously generated Source Maps
+
 ### 1.1.0
 
 > 2016-12-27
 
-- [feat] `suffix` can contain any falsy value to skip rename
-- [bug] added module.exports to main file
+- *[feature]* `suffix` can contain any falsy value to skip rename
+- *[fix]* added module.exports to main file
 
 ### 1.0.0
 
