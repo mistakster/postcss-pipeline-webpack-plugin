@@ -30,17 +30,17 @@
   },
   "dependencies": {
     "postcss": "^5.0.0",
-    "webpack-sources": "^0.1.3"
+    "webpack-sources": "^0.2.0"
   },
   "devDependencies": {
-    "css-loader": "^0.26.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^2.1.0",
     "memory-fs": "^0.4.1",
     "mocha": "^3.2.0",
     "postcss-critical-split": "^2.3.1",
-    "postcss-csso": "^1.1.2",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
-    "webpack-sources": "^0.1.3"
+    "postcss-csso": "^2.0.0",
+    "style-loader": "^0.14.1",
+    "webpack": "^2.2.1",
+    "webpack-sources": "^0.2.0"
   }
 }

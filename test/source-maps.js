@@ -48,12 +48,19 @@ const baseConfig = {
   devtool: 'source-map',
 
   module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&-autoprefixer')
-      }
-    ]
+    rules: [{
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: {
+          loader: "css-loader",
+          options: {
+            sourceMap: true,
+            autoprefixer: false
+          }
+        }
+      })
+    }]
   },
 
   plugins: [
