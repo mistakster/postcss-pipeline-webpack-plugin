@@ -46,10 +46,13 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&-autoprefixer')
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ]
   },
@@ -136,6 +139,10 @@ As you can see, webpack generates artifacts in one pass.
 See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
+
+### 2.0.0
+
+- *[breaking]* switched to webpack 2 and upgraded minor dependencies
 
 ### 1.2.0
 
