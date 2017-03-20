@@ -142,6 +142,8 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ### 2.0.0
 
+> 2017-03-20
+
 - *[breaking]* switched to webpack 2 and upgraded minor dependencies
 
 ### 1.2.0
