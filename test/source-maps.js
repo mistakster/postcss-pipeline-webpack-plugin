@@ -85,6 +85,8 @@ function readMap(fs, filename) {
 }
 
 describe('Integration test', function () {
+  this.timeout(5000);
+
   it('should generate expected files', function () {
     const config = buildConfig([
       new PostCssPipelineWebpackPlugin({
