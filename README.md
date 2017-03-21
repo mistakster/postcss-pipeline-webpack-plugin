@@ -68,7 +68,7 @@ module.exports = {
 
 For example, you may want to process your styles with [postcss-critical-css] plugin.
 It generates an additional file, which contains only styles between start- and stop-tags.
-You can’t use optimize generated styles before the plugin because minification removes all comments.
+You can’t use the optimization of generated styles before the plugin because minification removes all comments.
 So, you have to minify “all” and “critical” parts separately.
 
 It’s pretty easy with **postcss-pipeline-webpack-plugin**. You can provide as many PostCSS pipelines as you need.
