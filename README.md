@@ -140,6 +140,13 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
 
+### 3.0.0
+
+> 2017-05-30
+
+- *[breaking]* set minimal required node.js version to 4.7
+- *[breaking]* upgraded PostCSS and other minor dependencies
+
 ### 2.0.0
 
 > 2017-03-20
