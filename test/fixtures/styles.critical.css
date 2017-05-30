@@ -1,24 +1,29 @@
 header {
-    background-color: #1d1d1d;
-    font-size: 2em;
+  background-color: #1d1d1d;
+  font-size: 2em;
 }
+
 .aside {
-    text-decoration: underline;
+  text-decoration: underline;
 }
+
 li {
-    color: red;
+  color: red;
 }
+
 a[rel=external]:before {
-    content: '[!]';
+  content: '[!]';
 }
+
 @media screen and (min-width: 400px) {
-    footer {
-        padding: 50px;
-    }
+  footer {
+    padding: 50px;
+  }
 }
+
 @media screen and (min-width: 1400px) {
-    header {
-        background-color: #FF0066;
-        font-size: 3em;
-    }
+  header {
+    background-color: #FF0066;
+    font-size: 3em;
+  }
 }

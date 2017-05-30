@@ -6,6 +6,9 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
+[test/fixtures/**/*]
+insert_final_newline = false
+
 [*.{js,json,yml,css}]
 charset = utf-8
 indent_style = space
