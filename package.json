@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "postcss": "^6.0.1",
-    "webpack-sources": "^0.2.3"
+    "webpack-sources": "^1.0.0"
   },
   "devDependencies": {
     "css-loader": "^0.28.4",
