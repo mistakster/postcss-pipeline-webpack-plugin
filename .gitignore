@@ -4,3 +4,6 @@
 
 # npm modules
 node_modules
+
+# rubbish
+.DS_Store
