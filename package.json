@@ -1,6 +1,6 @@
 {
   "name": "postcss-pipeline-webpack-plugin",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A webpack plugin to process generated assets with PostCSS pipeline",
   "main": "index.js",
   "scripts": {
