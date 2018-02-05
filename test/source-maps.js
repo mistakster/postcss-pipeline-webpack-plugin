@@ -93,8 +93,8 @@ describe('Integration test', function () {
         const files = fs.readdirSync(destPath);
 
         assert.equal(files.length, 4);
-        assert(files.indexOf('styles.css') >= 0, 'Generated styles is missing');
-        assert(files.indexOf('styles.css.map') >= 0, 'Source map for the styles is missing');
+        assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
+        assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
 
         return fs;
       })
@@ -123,10 +123,10 @@ describe('Integration test', function () {
         const files = fs.readdirSync(destPath);
 
         assert.equal(files.length, 6);
-        assert(files.indexOf('styles.css') >= 0, 'Generated styles is missing');
-        assert(files.indexOf('styles.css.map') >= 0, 'Source map for the styles is missing');
-        assert(files.indexOf('styles.processed.css') >= 0, 'Generated styles is missing');
-        assert(files.indexOf('styles.processed.css.map') >= 0, 'Source map for the styles is missing');
+        assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
+        assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
+        assert(files.some(file => file === 'styles.processed.css'), 'Generated styles is missing');
+        assert(files.some(file => file === 'styles.processed.css.map'), 'Source map for the styles is missing');
 
         return fs;
       })
@@ -181,14 +181,14 @@ describe('Integration test', function () {
         const files = fs.readdirSync(destPath);
 
         assert.equal(files.length, 10);
-        assert(files.indexOf('styles.css') >= 0, 'Generated styles is missing');
-        assert(files.indexOf('styles.css.map') >= 0, 'Source map for the styles is missing');
-        assert(files.indexOf('styles.critical.css') >= 0, 'Generated critical styles is missing');
-        assert(files.indexOf('styles.critical.css.map') >= 0, 'Source map for the critical styles is missing');
-        assert(files.indexOf('styles.min.css') >= 0, 'Optimized styles is missing');
-        assert(files.indexOf('styles.min.css.map') >= 0, 'Source map for the optimized styles is missing');
-        assert(files.indexOf('styles.critical.min.css') >= 0, 'Optimized critical styles is missing');
-        assert(files.indexOf('styles.critical.min.css.map') >= 0, 'Source map for the optimized critical styles is missing');
+        assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
+        assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
+        assert(files.some(file => file === 'styles.critical.css'), 'Generated critical styles is missing');
+        assert(files.some(file => file === 'styles.critical.css.map'), 'Source map for the critical styles is missing');
+        assert(files.some(file => file === 'styles.min.css'), 'Optimized styles is missing');
+        assert(files.some(file => file === 'styles.min.css.map'), 'Source map for the optimized styles is missing');
+        assert(files.some(file => file === 'styles.critical.min.css'), 'Optimized critical styles is missing');
+        assert(files.some(file => file === 'styles.critical.min.css.map'), 'Source map for the optimized critical styles is missing');
 
         return fs;
       })
@@ -260,12 +260,12 @@ describe('Integration test', function () {
         const files = fs.readdirSync(destPath);
 
         assert.equal(files.length, 7);
-        assert(files.indexOf('styles.css') >= 0, 'Generated styles is missing');
-        assert(files.indexOf('styles.critical.css') >= 0, 'Generated critical styles is missing');
-        assert(files.indexOf('styles.min.css') >= 0, 'Optimized styles is missing');
-        assert(files.indexOf('styles.min.css.map') >= 0, 'Source map for the optimized styles is missing');
-        assert(files.indexOf('styles.critical.min.css') >= 0, 'Optimized critical styles is missing');
-        assert(files.indexOf('styles.critical.min.css.map') >= 0, 'Source map for the optimized critical styles is missing');
+        assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
+        assert(files.some(file => file === 'styles.critical.css'), 'Generated critical styles is missing');
+        assert(files.some(file => file === 'styles.min.css'), 'Optimized styles is missing');
+        assert(files.some(file => file === 'styles.min.css.map'), 'Source map for the optimized styles is missing');
+        assert(files.some(file => file === 'styles.critical.min.css'), 'Optimized critical styles is missing');
+        assert(files.some(file => file === 'styles.critical.min.css.map'), 'Source map for the optimized critical styles is missing');
 
         return fs;
       })
