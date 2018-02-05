@@ -110,8 +110,8 @@ describe('Integration test', function () {
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
           });
       });
   });
@@ -159,29 +159,29 @@ describe('Integration test', function () {
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
           })
           .then(() => readMap(fs, 'styles.critical.css.map'))
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(!sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is present in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(!sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is present in the source map');
           })
           .then(() => readMap(fs, 'styles.min.css.map'))
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
           })
           .then(() => readMap(fs, 'styles.critical.min.css.map'))
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(!sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is present in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(!sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is present in the source map');
           })
       });
   });
@@ -227,15 +227,15 @@ describe('Integration test', function () {
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
           })
           .then(() => readMap(fs, 'styles.critical.min.css.map'))
           .then(map => {
             const sources = map.sources;
 
-            assert(sources.some(s => /fixtures\/main.css$/.test(s)), 'Main styles is missing in the source map');
-            assert(!sources.some(s => /fixtures\/partial.css$/.test(s)), 'Partial styles is present in the source map');
+            assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+            assert(!sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is present in the source map');
           })
       });
   });

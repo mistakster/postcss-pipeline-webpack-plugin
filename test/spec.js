@@ -91,7 +91,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
   it('should filter files to process', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
-      predicate: name => /foobar.css$/.test(name)
+      predicate: name => /foobar\.css$/.test(name)
     });
 
     return plugin
