@@ -89,6 +89,30 @@ describe('PostCss Pipeline Webpack Plugin', function () {
       });
   });
 
+  it('should process files with query params', function () {
+    const plugin = new PostCssPipelineWebpackPlugin();
+
+    return plugin
+      .generate({
+        assets: {
+          './styles.js': new RawSource(''),
+          './styles.css?hash': new RawSource(''),
+          './foobar.css': new RawSource('')
+        }
+      })
+      .then(compilation => {
+        const keys = Object.keys(compilation.assets);
+
+        assert.deepStrictEqual(keys, [
+          './styles.js',
+          './styles.css?hash',
+          './foobar.css',
+          './styles.processed.css?hash',
+          './foobar.processed.css'
+        ]);
+      })
+  });
+
   it('should filter files to process', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
       predicate: name => /foobar\.css$/.test(name)
