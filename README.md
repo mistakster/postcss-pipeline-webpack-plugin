@@ -140,6 +140,12 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
 
+### 3.1.0
+
+> 2018-02-05
+
+- *[major]* made the plugin compatible with filename’s template like `[name].css?[contenthash]`
+
 ### 3.0.1
 
 > 2017-08-14
