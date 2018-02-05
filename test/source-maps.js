@@ -88,16 +88,6 @@ describe('Integration test', function () {
   this.timeout(5000);
 
   it('should generate expected files', function () {
-    const config = buildConfig([
-      new PostCssPipelineWebpackPlugin({
-        map: {
-          inline: false
-        }
-      })
-    ], {
-      devtool: 'source-map'
-    });
-
     return runner(baseConfig)
       .then(fs => {
         const files = fs.readdirSync(destPath);
@@ -113,6 +103,50 @@ describe('Integration test', function () {
             assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
             assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
           });
+      });
+  });
+
+  it('should generate expected files after a pipeline', function () {
+    const config = buildConfig([
+      new PostCssPipelineWebpackPlugin({
+        map: {
+          inline: false
+        }
+      })
+    ], {
+      devtool: 'source-map'
+    });
+
+    return runner(config)
+      .then(fs => {
+        const files = fs.readdirSync(destPath);
+
+        assert.equal(files.length, 6);
+        assert(files.indexOf('styles.css') >= 0, 'Generated styles is missing');
+        assert(files.indexOf('styles.css.map') >= 0, 'Source map for the styles is missing');
+        assert(files.indexOf('styles.processed.css') >= 0, 'Generated styles is missing');
+        assert(files.indexOf('styles.processed.css.map') >= 0, 'Source map for the styles is missing');
+
+        return fs;
+      })
+      .then(fs => {
+        const file1 = fs.readFileSync(path.resolve(destPath, 'styles.css'))
+          .toString()
+          .replace(/\s+\/\*# sourceMappingURL=styles.css.map\*\//, '');
+        const file2 = fs.readFileSync(path.resolve(destPath, 'styles.processed.css'))
+          .toString()
+          .replace(/\s+\/\*# sourceMappingURL=styles.processed.css.map \*\//, '');
+
+        assert.equal(file1, file2, 'The content of the generated files doesn\'t match');
+
+        return fs;
+      })
+      .then(fs => readMap(fs, 'styles.css.map'))
+      .then(map => {
+        const sources = map.sources;
+
+        assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
+        assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
       });
   });
 
