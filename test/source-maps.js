@@ -2,7 +2,7 @@ const assert = require('assert');
 const path = require('path');
 const MemoryFS = require('memory-fs');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
 const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
@@ -37,6 +37,8 @@ function runner(config) {
 }
 
 const baseConfig = {
+  mode: 'production',
+
   entry: './test/fixtures/main.css',
 
   output: {
@@ -50,21 +52,17 @@ const baseConfig = {
   module: {
     rules: [{
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: {
-          loader: "css-loader",
-          options: {
-            sourceMap: true,
-            autoprefixer: false
-          }
-        }
-      })
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader'
+      ]
     }]
   },
 
   plugins: [
-    new ExtractTextPlugin('styles.css')
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
+    })
   ]
 };
 

@@ -2,7 +2,7 @@ const assert = require('assert');
 const path = require('path');
 const MemoryFS = require('memory-fs');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
 
 const destPath = path.resolve('./dest/');
@@ -39,6 +39,8 @@ function runner(config) {
 }
 
 const baseConfig = {
+  mode: 'production',
+
   entry: './test/fixtures/main.css',
 
   output: {
@@ -49,16 +51,10 @@ const baseConfig = {
   module: {
     rules: [{
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: {
-          loader: "css-loader",
-          options: {
-            sourceMap: true,
-            autoprefixer: false
-          }
-        }
-      })
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader'
+      ]
     }]
   },
 
@@ -86,7 +82,9 @@ describe('Tests for different file names', function () {
 
   it('should generate expected files for the template without query params', function () {
     const config = buildConfig([
-      new ExtractTextPlugin('[name].[contenthash].css'),
+      new MiniCssExtractPlugin({
+        filename: '[name].[chunkhash].css'
+      }),
       new PostCssPipelineWebpackPlugin()
     ]);
 
@@ -95,8 +93,8 @@ describe('Tests for different file names', function () {
         const files = fs.readdirSync(destPath);
 
         assert.equal(files.length, 3);
-        assert(files.some(file => /^main\.[0-9a-f]{32}\.css$/.test(file)), 'Generated styles is missing');
-        assert(files.some(file => /^main\.[0-9a-f]{32}\.processed.css$/.test(file)), 'Generated styles is missing');
+        assert(files.some(file => /^main\.[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
+        assert(files.some(file => /^main\.[0-9a-f]{20}\.processed.css$/.test(file)), 'Generated styles is missing');
 
         return fs;
       })
@@ -104,14 +102,16 @@ describe('Tests for different file names', function () {
         const assets = fs.getAssets();
 
         assert.equal(assets.length, 3);
-        assert(assets.some(a => /^main\.[0-9a-f]{32}\.css$/.test(a)), 'Generated styles is missing');
-        assert(assets.some(a => /^main\.[0-9a-f]{32}\.processed.css$/.test(a)), 'Generated styles is missing');
+        assert(assets.some(a => /^main\.[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
+        assert(assets.some(a => /^main\.[0-9a-f]{20}\.processed.css$/.test(a)), 'Generated styles is missing');
       });
   });
 
   it('should generate expected files for the template with query params', function () {
     const config = buildConfig([
-      new ExtractTextPlugin('[name].css?[contenthash]'),
+      new MiniCssExtractPlugin({
+        filename: '[name].css?[chunkhash]'
+      }),
       new PostCssPipelineWebpackPlugin()
     ]);
 
@@ -129,8 +129,8 @@ describe('Tests for different file names', function () {
         const assets = fs.getAssets();
 
         assert.equal(assets.length, 3);
-        assert(assets.some(a => /^main\.css\?[0-9a-f]{32}$/.test(a)), 'Generated styles is missing');
-        assert(assets.some(a => /^main\.processed.css\?[0-9a-f]{32}$/.test(a)), 'Generated styles is missing');
+        assert(assets.some(a => /^main\.css\?[0-9a-f]{20}$/.test(a)), 'Generated styles is missing');
+        assert(assets.some(a => /^main\.processed.css\?[0-9a-f]{20}$/.test(a)), 'Generated styles is missing');
       });
   });
 });
