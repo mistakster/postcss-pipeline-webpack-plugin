@@ -16,6 +16,8 @@ you are no longer able to process these files. This plugin was made to solve thi
 npm install --save postcss-pipeline-webpack-plugin 
 ```
 
+It requires webpack v4 to work. Please, use previous major version if you use webpack v3.
+
 ## Usage
 
 ```js
@@ -38,6 +40,8 @@ So, you can use this initialized instance of the plugin in webpack configuration
 
 ```js
 module.exports = {
+  mode: 'production',
+
   entry: './src/index.css',
 
   output: {
@@ -49,16 +53,18 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       }
     ]
   },
 
   plugins: [
-    new ExtractTextPlugin('styles.css'),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
+    }),
     pipelinePlugin    
   ]
 };
@@ -80,13 +86,16 @@ For your task, we need to set up two pipelines with one plugin in each other:
  
 ```js
 const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
 
 module.exports = {
   // ...  
   plugins: [
-    new ExtractTextPlugin('styles.css'),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
+    }),
     new PostCssPipelineWebpackPlugin({
       suffix: 'critical',
       pipeline: [
@@ -139,6 +148,12 @@ As you can see, webpack generates artifacts in **one pass**.
 See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
+
+### 4.0.0
+
+> 2018-03-27
+
+- *[major]* added webpack 4 support
 
 ### 3.1.0
 

@@ -1,10 +1,12 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
 const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
 
 module.exports = {
+  mode: 'production',
+
   entry: './src/index.css',
 
   output: {
@@ -15,21 +17,17 @@ module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: {
-          loader: "css-loader",
-          options: {
-            sourceMap: true,
-            autoprefixer: false
-          }
-        }
-      })
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader'
+      ]
     }]
   },
 
   plugins: [
-    new ExtractTextPlugin('styles.css'),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
+    }),
     new PostCssPipelineWebpackPlugin({
       suffix: 'critical',
       pipeline: [
