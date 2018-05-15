@@ -77,7 +77,7 @@ function readMap(fs, filename) {
   );
 }
 
-describe('Tests for different file names', function () {
+describe('File name integration test', function () {
   this.timeout(5000);
 
   it('should generate expected files for the template without query params', function () {
