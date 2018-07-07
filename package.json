@@ -33,7 +33,7 @@
     "webpack-sources": "^1.1.0"
   },
   "devDependencies": {
-    "css-loader": "^0.28.11",
+    "css-loader": "^1.0.0",
     "memory-fs": "^0.4.1",
     "mini-css-extract-plugin": "^0.4.0",
     "mocha": "^5.1.1",
