@@ -29,7 +29,7 @@
     "npm": "^3.0.0"
   },
   "dependencies": {
-    "postcss": "^6.0.23",
+    "postcss": "^7.0.0",
     "webpack-sources": "^1.1.0"
   },
   "devDependencies": {
