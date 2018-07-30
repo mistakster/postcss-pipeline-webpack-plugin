@@ -13,7 +13,7 @@ you are no longer able to process these files. This plugin was made to solve thi
 ## Install
 
 ```
-npm install --save postcss-pipeline-webpack-plugin 
+npm install --save postcss-pipeline-webpack-plugin
 ```
 
 It requires webpack v4 to work. Please, use previous major version if you use webpack v3.
@@ -24,8 +24,10 @@ It requires webpack v4 to work. Please, use previous major version if you use we
 const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 
 const pipelinePlugin = new PostCssPipelineWebpackPlugin({
-  // provide an optional function to filter out unwanted CSS 
+  // provide an optional function to filter out unwanted CSS
   predicate: name => /foobar.css$/.test(name),
+  // provide an optional string attached to the beginning of a new file
+  prefix: 'critical',
   // provide an optional string which will be using as a suffix for newly generated files
   suffix: 'processed',
   // provide any PostCSS plugins here
@@ -65,7 +67,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'styles.css'
     }),
-    pipelinePlugin    
+    pipelinePlugin
   ]
 };
 ```
@@ -82,8 +84,8 @@ It’s pretty easy with **postcss-pipeline-webpack-plugin**. You can provide as 
 For your task, we need to set up two pipelines with one plugin in each other:
 
 * postcss-critical-split
-* postcss-csso 
- 
+* postcss-csso
+
 ```js
 const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -91,7 +93,7 @@ const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
 
 module.exports = {
-  // ...  
+  // ...
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'styles.css'
@@ -143,11 +145,17 @@ styles.critical.min.css
 styles.critical.min.css.map
 ```
 
-As you can see, webpack generates artifacts in **one pass**. 
+As you can see, webpack generates artifacts in **one pass**.
 
 See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
+
+### 4.1.0
+
+> 2018-07-30
+
+- *[major]* added `prefix` option
 
 ### 4.0.0
 
