@@ -1,9 +1,11 @@
 const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
+const postcss = require('postcss');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
 const RawSource = require('webpack-sources').RawSource;
 const assert = require('assert');
 const fs = require('fs');
+const nullPlugin = require('./helpers/postcss-null-plugin');
 
 function readFile(name) {
   return new Promise((resolve, reject) => {
@@ -25,7 +27,9 @@ describe('PostCss Pipeline Webpack Plugin', function () {
   it('should leave given CSS untouched with default options', function () {
     return getFixture()
       .then(source => {
-        const plugin = new PostCssPipelineWebpackPlugin();
+        const plugin = new PostCssPipelineWebpackPlugin({
+          processor: postcss([nullPlugin])
+        });
 
         return plugin.generate({
           assets: {
@@ -50,6 +54,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
   it('should generate properly named files', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
+      processor: postcss([nullPlugin]),
       suffix: 'min'
     });
 
@@ -71,6 +76,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
   it('should generate properly named files when suffix is undefined', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
+      processor: postcss([nullPlugin]),
       suffix: undefined
     });
 
@@ -90,7 +96,9 @@ describe('PostCss Pipeline Webpack Plugin', function () {
   });
 
   it('should process files with query params', function () {
-    const plugin = new PostCssPipelineWebpackPlugin();
+    const plugin = new PostCssPipelineWebpackPlugin({
+      processor: postcss([nullPlugin])
+    });
 
     return plugin
       .generate({
@@ -115,6 +123,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
   it('should filter files to process', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
+      processor: postcss([nullPlugin]),
       predicate: name => /foobar\.css$/.test(name)
     });
 
@@ -140,6 +149,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
   it('should process SourceMaps as well', function () {
     const plugin = new PostCssPipelineWebpackPlugin({
+      processor: postcss([nullPlugin]),
       map: {
         inline: false
       }
@@ -177,11 +187,11 @@ describe('PostCss Pipeline Webpack Plugin', function () {
       .then(compilation => {
         const plugin = new PostCssPipelineWebpackPlugin({
           suffix: 'critical',
-          pipeline: [
+          processor: postcss([
             criticalSplit({
               output: criticalSplit.output_types.CRITICAL_CSS
             })
-          ]
+          ])
         });
 
         return plugin.generate(compilation);
@@ -189,11 +199,11 @@ describe('PostCss Pipeline Webpack Plugin', function () {
       .then(compilation => {
         const plugin = new PostCssPipelineWebpackPlugin({
           suffix: 'min',
-          pipeline: [
+          processor: postcss([
             csso({
               restructure: false
             })
-          ],
+          ]),
           map: {
             inline: false
           }

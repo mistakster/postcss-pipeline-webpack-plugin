@@ -3,6 +3,8 @@ const path = require('path');
 const MemoryFS = require('memory-fs');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcss = require('postcss');
+const nullPlugin = require('./helpers/postcss-null-plugin');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
 const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
@@ -108,6 +110,7 @@ describe('Source map integration test', function () {
   it('should generate expected files after a pipeline', function () {
     const config = buildConfig([
       new PostCssPipelineWebpackPlugin({
+        processor: postcss([nullPlugin]),
         map: {
           inline: false
         }
@@ -153,19 +156,20 @@ describe('Source map integration test', function () {
     const config = buildConfig([
       new PostCssPipelineWebpackPlugin({
         suffix: 'critical',
-        pipeline: [
+        processor: postcss([
           criticalSplit({
             output: criticalSplit.output_types.CRITICAL_CSS
           })
-        ]
+        ])
       }),
       new PostCssPipelineWebpackPlugin({
         suffix: 'min',
-        pipeline: [
-          csso({
-            restructure: false
-          })
-        ],
+        processor: postcss([
+            csso({
+              restructure: false
+            })
+          ]
+        ),
         map: {
           inline: false
         }
@@ -232,19 +236,19 @@ describe('Source map integration test', function () {
     const config = buildConfig([
       new PostCssPipelineWebpackPlugin({
         suffix: 'critical',
-        pipeline: [
+        processor: postcss([
           criticalSplit({
             output: criticalSplit.output_types.CRITICAL_CSS
           })
-        ]
+        ])
       }),
       new PostCssPipelineWebpackPlugin({
         suffix: 'min',
-        pipeline: [
+        processor: postcss([
           csso({
             restructure: false
           })
-        ],
+        ]),
         map: {
           inline: false
         }

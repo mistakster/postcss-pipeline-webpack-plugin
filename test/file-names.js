@@ -3,6 +3,8 @@ const path = require('path');
 const MemoryFS = require('memory-fs');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcss = require('postcss');
+const nullPlugin = require('./helpers/postcss-null-plugin');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
 
 const destPath = path.resolve('./dest/');
@@ -86,6 +88,7 @@ describe('File name integration test', function () {
         filename: '[name].[chunkhash].css'
       }),
       new PostCssPipelineWebpackPlugin({
+        processor: postcss([nullPlugin]),
         prefix: 'prefix',
         suffix: null
       })
@@ -116,6 +119,7 @@ describe('File name integration test', function () {
         filename: '[name].[chunkhash].css'
       }),
       new PostCssPipelineWebpackPlugin({
+        processor: postcss([nullPlugin]),
         prefix: 'prefix',
         suffix: 'suffix'
       })
@@ -145,7 +149,9 @@ describe('File name integration test', function () {
       new MiniCssExtractPlugin({
         filename: '[name].[chunkhash].css'
       }),
-      new PostCssPipelineWebpackPlugin()
+      new PostCssPipelineWebpackPlugin({
+        processor: postcss([nullPlugin])
+      })
     ]);
 
     return runner(config)
@@ -172,7 +178,9 @@ describe('File name integration test', function () {
       new MiniCssExtractPlugin({
         filename: '[name].css?[chunkhash]'
       }),
-      new PostCssPipelineWebpackPlugin()
+      new PostCssPipelineWebpackPlugin({
+        processor: postcss([nullPlugin])
+      })
     ]);
 
     return runner(config)

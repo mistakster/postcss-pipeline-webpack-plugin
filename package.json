@@ -29,7 +29,6 @@
     "npm": "^3.0.0"
   },
   "dependencies": {
-    "postcss": "^6.0.23",
     "webpack-sources": "^1.1.0"
   },
   "devDependencies": {
@@ -37,9 +36,10 @@
     "memory-fs": "^0.4.1",
     "mini-css-extract-plugin": "^0.4.1",
     "mocha": "^5.2.0",
+    "postcss": "^7.0.1",
     "postcss-critical-split": "^2.5.1",
     "postcss-csso": "^3.0.0",
     "style-loader": "^0.21.0",
-    "webpack": "^4.15.1"
+    "webpack": "^4.16.3"
   }
 }
