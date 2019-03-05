@@ -21,17 +21,19 @@ It requires webpack v4 to work. Please, use previous major version if you use we
 ## Usage
 
 ```js
+const postcss = require('postcss');
 const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 
 const pipelinePlugin = new PostCssPipelineWebpackPlugin({
+  processor: postcss([
+      // provide any PostCSS plugins here
+  ]),
   // provide an optional function to filter out unwanted CSS
   predicate: name => /foobar.css$/.test(name),
   // provide an optional string attached to the beginning of a new file
   prefix: 'critical',
   // provide an optional string which will be using as a suffix for newly generated files
   suffix: 'processed',
-  // provide any PostCSS plugins here
-  pipeline: [],
   // you can pass any relevant SourceMap options
   // see https://github.com/postcss/postcss/blob/master/docs/source-maps.md
   map: {}
@@ -89,6 +91,7 @@ For your task, we need to set up two pipelines with one plugin in each other:
 ```js
 const PostCssPipelineWebpackPlugin = require('postcss-pipeline-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcss = require('postcss');
 const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
 
@@ -100,19 +103,19 @@ module.exports = {
     }),
     new PostCssPipelineWebpackPlugin({
       suffix: 'critical',
-      pipeline: [
+      processor: postcss([
         criticalSplit({
           output: criticalSplit.output_types.CRITICAL_CSS
         })
-      ]
+      ])
     }),
     new PostCssPipelineWebpackPlugin({
       suffix: 'min',
-      pipeline: [
+      processor: postcss([
         csso({
           restructure: false
         })
-      ],
+      ]),
       map: {
         inline: false
       }
@@ -150,6 +153,12 @@ As you can see, webpack generates artifacts in **one pass**.
 See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
+
+### 4.1.1
+
+> 2019-03-05
+
+- *[minor]* clean up the code and documentation
 
 ### 4.1.0
 
