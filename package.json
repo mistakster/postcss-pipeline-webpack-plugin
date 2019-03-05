@@ -4,7 +4,8 @@
   "description": "A webpack plugin to process generated assets with PostCSS pipeline",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "example": "cd ./examples && webpack"
   },
   "keywords": [
     "webpack",
@@ -40,6 +41,7 @@
     "postcss-critical-split": "^2.5.2",
     "postcss-csso": "^3.0.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.28.4"
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.3"
   }
 }
