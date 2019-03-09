@@ -151,6 +151,18 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
 
+### 4.1.2
+
+> 2019-03-09
+
+- *[minor]* fixed semver incompatibility
+
+### 4.1.1
+
+> 2019-03-05
+
+**DEPRECATED**
+
 ### 4.1.0
 
 > 2018-07-30
