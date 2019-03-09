@@ -18,6 +18,8 @@ npm install --save postcss-pipeline-webpack-plugin
 
 It requires webpack v4 to work. Please, use previous major version if you use webpack v3.
 
+The plugin is compatible with both PostCSS 6.x and 7.x branches.
+
 ## Usage
 
 ```js
@@ -153,6 +155,13 @@ As you can see, webpack generates artifacts in **one pass**.
 See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
+
+### 5.0.0
+
+> 2019-03-09
+
+- *[breaking]* `pipeline` option was replaced with `processor` to let the developer decide which version of the PostCSS to use
+- *[minor]* improved examples and documentation
 
 ### 4.1.2
 
