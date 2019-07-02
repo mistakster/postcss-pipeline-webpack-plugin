@@ -1,6 +1,6 @@
 {
   "name": "postcss-pipeline-webpack-plugin",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "A webpack plugin to process generated assets with PostCSS pipeline",
   "main": "index.js",
   "scripts": {
@@ -26,22 +26,22 @@
   },
   "license": "ISC",
   "engines": {
-    "node": ">=6",
-    "npm": "^3.0.0"
+    "node": ">=10",
+    "npm": "^6.9.0"
   },
   "dependencies": {
     "webpack-sources": "^1.3.0"
   },
   "devDependencies": {
-    "css-loader": "^2.1.1",
+    "css-loader": "^3.0.0",
     "memory-fs": "^0.4.1",
-    "mini-css-extract-plugin": "^0.5.0",
-    "mocha": "^6.0.2",
-    "postcss": "^7.0.14",
-    "postcss-critical-split": "^2.5.2",
+    "mini-css-extract-plugin": "^0.7.0",
+    "mocha": "^6.1.4",
+    "postcss": "^7.0.17",
+    "postcss-critical-split": "^2.5.3",
     "postcss-csso": "^3.0.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
   }
 }
