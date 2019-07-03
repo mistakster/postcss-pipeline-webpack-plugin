@@ -82,6 +82,36 @@ function readMap(fs, filename) {
 describe('File name integration test', function () {
   this.timeout(5000);
 
+  it('should use transformName function to generate new names', function () {
+    const config = buildConfig([
+      new MiniCssExtractPlugin({
+        filename: '[name]-[chunkhash].css'
+      }),
+      new PostCssPipelineWebpackPlugin({
+        processor: postcss([nullPlugin]),
+        transformName: name => 'critical-' + name
+      })
+    ]);
+
+    return runner(config)
+      .then(fs => {
+        const files = fs.readdirSync(destPath);
+
+        assert.strictEqual(files.length, 3);
+        assert(files.some(file => /^main-[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
+        assert(files.some(file => /^critical-main-[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
+
+        return fs;
+      })
+      .then(fs => {
+        const assets = fs.getAssets();
+
+        assert.strictEqual(assets.length, 3);
+        assert(assets.some(a => /^main-[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
+        assert(assets.some(a => /^critical-main-[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
+      });
+  });
+
   it('should use prefix for the file names', function () {
     const config = buildConfig([
       new MiniCssExtractPlugin({
