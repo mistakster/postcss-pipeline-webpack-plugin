@@ -92,7 +92,7 @@ describe('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 4);
+        assert.strictEqual(files.length, 4);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
 
@@ -123,7 +123,7 @@ describe('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 6);
+        assert.strictEqual(files.length, 6);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
         assert(files.some(file => file === 'styles.processed.css'), 'Generated styles is missing');
@@ -139,7 +139,7 @@ describe('Source map integration test', function () {
           .toString()
           .replace(/\s+\/\*# sourceMappingURL=styles.processed.css.map \*\//, '');
 
-        assert.equal(file1, file2, 'The content of the generated files doesn\'t match');
+        assert.strictEqual(file1, file2, 'The content of the generated files doesn\'t match');
 
         return fs;
       })
@@ -182,7 +182,7 @@ describe('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 10);
+        assert.strictEqual(files.length, 10);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
         assert(files.some(file => file === 'styles.critical.css'), 'Generated critical styles is missing');
@@ -261,7 +261,7 @@ describe('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 7);
+        assert.strictEqual(files.length, 7);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.critical.css'), 'Generated critical styles is missing');
         assert(files.some(file => file === 'styles.min.css'), 'Optimized styles is missing');

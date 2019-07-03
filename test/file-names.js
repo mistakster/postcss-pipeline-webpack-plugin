@@ -98,7 +98,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 3);
+        assert.strictEqual(files.length, 3);
         assert(files.some(file => /^main\.[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
         assert(files.some(file => /^prefix\.main\.[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
 
@@ -107,7 +107,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const assets = fs.getAssets();
 
-        assert.equal(assets.length, 3);
+        assert.strictEqual(assets.length, 3);
         assert(assets.some(a => /^main\.[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
         assert(assets.some(a => /^prefix\.main\.[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
       });
@@ -129,7 +129,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 3);
+        assert.strictEqual(files.length, 3);
         assert(files.some(file => /^main\.[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
         assert(files.some(file => /^prefix\.main\.[0-9a-f]{20}\.suffix\.css$/.test(file)), 'Generated styles is missing');
 
@@ -138,7 +138,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const assets = fs.getAssets();
 
-        assert.equal(assets.length, 3);
+        assert.strictEqual(assets.length, 3);
         assert(assets.some(a => /^main\.[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
         assert(assets.some(a => /^prefix\.main\.[0-9a-f]{20}\.suffix\.css$/.test(a)), 'Generated styles is missing');
       });
@@ -158,7 +158,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 3);
+        assert.strictEqual(files.length, 3);
         assert(files.some(file => /^main\.[0-9a-f]{20}\.css$/.test(file)), 'Generated styles is missing');
         assert(files.some(file => /^main\.[0-9a-f]{20}\.processed.css$/.test(file)), 'Generated styles is missing');
 
@@ -167,7 +167,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const assets = fs.getAssets();
 
-        assert.equal(assets.length, 3);
+        assert.strictEqual(assets.length, 3);
         assert(assets.some(a => /^main\.[0-9a-f]{20}\.css$/.test(a)), 'Generated styles is missing');
         assert(assets.some(a => /^main\.[0-9a-f]{20}\.processed.css$/.test(a)), 'Generated styles is missing');
       });
@@ -187,7 +187,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.equal(files.length, 3);
+        assert.strictEqual(files.length, 3);
         assert(files.some(file => /^main\.css$/.test(file)), 'Generated styles is missing');
         assert(files.some(file => /^main\.processed.css$/.test(file)), 'Generated styles is missing');
 
@@ -196,7 +196,7 @@ describe('File name integration test', function () {
       .then(fs => {
         const assets = fs.getAssets();
 
-        assert.equal(assets.length, 3);
+        assert.strictEqual(assets.length, 3);
         assert(assets.some(a => /^main\.css\?[0-9a-f]{20}$/.test(a)), 'Generated styles is missing');
         assert(assets.some(a => /^main\.processed.css\?[0-9a-f]{20}$/.test(a)), 'Generated styles is missing');
       });
