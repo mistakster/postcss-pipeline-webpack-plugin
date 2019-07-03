@@ -36,6 +36,8 @@ const pipelinePlugin = new PostCssPipelineWebpackPlugin({
   prefix: 'critical',
   // provide an optional string which will be using as a suffix for newly generated files
   suffix: 'processed',
+  // or you can generate the name by yourself
+  transformName: name => 'critical-' + name,
   // you can pass any relevant SourceMap options
   // see https://github.com/postcss/postcss/blob/master/docs/source-maps.md
   map: {}
@@ -155,6 +157,12 @@ As you can see, webpack generates artifacts in **one pass**.
 See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
+
+### 5.1.0
+
+> 2019-07-03
+
+- *[major]* added `transformName` option to generate destination filenames 
 
 ### 5.0.0
 
