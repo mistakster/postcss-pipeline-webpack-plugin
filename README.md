@@ -16,7 +16,9 @@ you are no longer able to process these files. This plugin was made to solve thi
 npm install --save postcss-pipeline-webpack-plugin
 ```
 
-It requires webpack v4 to work. Please, use previous major version if you use webpack v3.
+## Compatibility
+
+It requires webpack 4.x to work. For webpack 3.x use [postcss-pipeline-webpack-plugin@3] package.
 
 The plugin is compatible with both PostCSS 6.x and 7.x branches.
 
@@ -87,7 +89,7 @@ So, you have to minify “all” and “critical” parts separately.
 
 It’s pretty easy with **postcss-pipeline-webpack-plugin**. You can provide as many PostCSS pipelines as you need.
 
-For your task, we need to set up two pipelines with one plugin in each other:
+For the task, we need to set up two pipelines with one plugin in each other:
 
 * postcss-critical-split
 * postcss-csso
@@ -247,3 +249,4 @@ ISC
 [webpack]: https://webpack.js.org
 [postcss-critical-css]: https://medium.com/@nocreativity/manage-your-critical-css-with-this-postcss-plugin-6be1ca226c06#.abnvj11p7
 [csso]: https://github.com/css/csso
+[postcss-pipeline-webpack-plugin@3]: https://www.npmjs.com/package/postcss-pipeline-webpack-plugin/v/3.1.0
