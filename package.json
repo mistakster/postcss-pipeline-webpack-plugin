@@ -27,7 +27,7 @@
   "license": "ISC",
   "engines": {
     "node": ">=6",
-    "npm": "^3.0.0"
+    "npm": ">=3"
   },
   "dependencies": {
     "webpack-sources": "^1.3.0"
