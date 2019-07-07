@@ -160,6 +160,12 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
 
+### 5.1.1
+
+> 2019-07-07
+
+- *[minor]* updated version of the engines
+
 ### 5.1.0
 
 > 2019-07-03
