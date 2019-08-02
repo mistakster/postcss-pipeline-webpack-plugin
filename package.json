@@ -41,7 +41,7 @@
     "postcss-critical-split": "^2.5.3",
     "postcss-csso": "^3.0.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.35.2",
+    "webpack": "^4.39.1",
     "webpack-cli": "^3.3.5"
   }
 }
