@@ -29,17 +29,17 @@
     "node": ">=6",
     "npm": ">=3"
   },
-  "dependencies": {
-    "webpack-sources": "^2.2.0"
+  "peerDependencies": {
+    "webpack": "^5"
   },
   "devDependencies": {
-    "css-loader": "^5.0.1",
+    "css-loader": "^4.3.0",
     "memory-fs": "^0.5.0",
     "mini-css-extract-plugin": "^1.3.3",
     "mocha": "^8.2.1",
-    "postcss": "^8.2.1",
+    "postcss": "^7.0.35",
     "postcss-critical-split": "^2.5.3",
-    "postcss-csso": "^5.0.0",
+    "postcss-csso": "^4.0.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.11.0",
     "webpack-cli": "^4.2.0"

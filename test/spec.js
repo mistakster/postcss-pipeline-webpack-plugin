@@ -2,7 +2,7 @@ const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
 const postcss = require('postcss');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
-const RawSource = require('webpack-sources').RawSource;
+const RawSource = require('webpack').sources.RawSource;
 const assert = require('assert');
 const fs = require('fs');
 const nullPlugin = require('./helpers/postcss-null-plugin');
@@ -31,14 +31,12 @@ describe('PostCss Pipeline Webpack Plugin', function () {
           processor: postcss([nullPlugin])
         });
 
-        return plugin.generate({
-          assets: {
-            './styles.css': source
-          }
+        return plugin.executePipeline({
+          './styles.css': source
         });
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.css',
@@ -46,8 +44,8 @@ describe('PostCss Pipeline Webpack Plugin', function () {
         ]);
 
         assert.strictEqual(
-          compilation.assets[keys[0]].source().toString(),
-          compilation.assets[keys[1]].source().toString()
+          assets[keys[0]].source().toString(),
+          assets[keys[1]].source().toString()
         );
       });
   });
@@ -59,13 +57,11 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     });
 
     return plugin
-      .generate({
-        assets: {
-          './styles.css': new RawSource('')
-        }
+      .executePipeline({
+        './styles.css': new RawSource('')
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.css',
@@ -81,13 +77,11 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     });
 
     return plugin
-      .generate({
-        assets: {
-          './styles.css': new RawSource('')
-        }
+      .executePipeline({
+        './styles.css': new RawSource('')
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.css'
@@ -101,15 +95,13 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     });
 
     return plugin
-      .generate({
-        assets: {
-          './styles.js': new RawSource(''),
-          './styles.css?hash': new RawSource(''),
-          './foobar.css': new RawSource('')
-        }
+      .executePipeline({
+        './styles.js': new RawSource(''),
+        './styles.css?hash': new RawSource(''),
+        './foobar.css': new RawSource('')
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.js',
@@ -128,15 +120,13 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     });
 
     return plugin
-      .generate({
-        assets: {
-          './styles.js': new RawSource(''),
-          './styles.css': new RawSource(''),
-          './foobar.css': new RawSource('')
-        }
+      .executePipeline({
+        './styles.js': new RawSource(''),
+        './styles.css': new RawSource(''),
+        './foobar.css': new RawSource('')
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.js',
@@ -156,13 +146,11 @@ describe('PostCss Pipeline Webpack Plugin', function () {
     });
 
     return plugin
-      .generate({
-        assets: {
-          './styles.css': new RawSource('')
-        }
+      .executePipeline({
+        './styles.css': new RawSource('')
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.css',
@@ -171,7 +159,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
         ]);
 
         assert.strictEqual(
-          compilation.assets[keys[1]].source().toString(),
+          assets[keys[1]].source().toString(),
           '\n/*# sourceMappingURL=styles.processed.css.map */'
         );
       });
@@ -180,11 +168,9 @@ describe('PostCss Pipeline Webpack Plugin', function () {
   it('should pass sources through pipeline correctly', function () {
     return getFixture()
       .then(source => ({
-        assets: {
-          './styles.css': source
-        }
+        './styles.css': source
       }))
-      .then(compilation => {
+      .then(assets => {
         const plugin = new PostCssPipelineWebpackPlugin({
           suffix: 'critical',
           processor: postcss([
@@ -194,9 +180,9 @@ describe('PostCss Pipeline Webpack Plugin', function () {
           ])
         });
 
-        return plugin.generate(compilation);
+        return plugin.executePipeline(assets);
       })
-      .then(compilation => {
+      .then(assets => {
         const plugin = new PostCssPipelineWebpackPlugin({
           suffix: 'min',
           processor: postcss([
@@ -209,10 +195,10 @@ describe('PostCss Pipeline Webpack Plugin', function () {
           }
         });
 
-        return plugin.generate(compilation);
+        return plugin.executePipeline(assets);
       })
-      .then(compilation => {
-        const keys = Object.keys(compilation.assets);
+      .then(assets => {
+        const keys = Object.keys(assets);
 
         assert.deepStrictEqual(keys, [
           './styles.css',
@@ -236,7 +222,7 @@ describe('PostCss Pipeline Webpack Plugin', function () {
           .then(files => {
             files.forEach((file, index) => {
               assert.strictEqual(
-                compilation.assets[keys[index]].source().toString(),
+                assets[keys[index]].source().toString(),
                 files[index].source().toString(),
                 fixtures[index]
               );

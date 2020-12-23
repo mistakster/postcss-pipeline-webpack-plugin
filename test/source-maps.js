@@ -92,7 +92,7 @@ describe('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.strictEqual(files.length, 4);
+        assert.strictEqual(files.length, 3);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
 
@@ -123,7 +123,7 @@ describe('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.strictEqual(files.length, 6);
+        assert.strictEqual(files.length, 5);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
         assert(files.some(file => file === 'styles.processed.css'), 'Generated styles is missing');
@@ -165,11 +165,10 @@ describe('Source map integration test', function () {
       new PostCssPipelineWebpackPlugin({
         suffix: 'min',
         processor: postcss([
-            csso({
-              restructure: false
-            })
-          ]
-        ),
+          csso({
+            restructure: false
+          })
+        ]),
         map: {
           inline: false
         }
