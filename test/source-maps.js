@@ -84,7 +84,7 @@ function readMap(fs, filename) {
   );
 }
 
-describe.skip('Source map integration test', function () {
+describe('Source map integration test', function () {
   this.timeout(5000);
 
   it('should generate expected files', function () {
@@ -137,7 +137,7 @@ describe.skip('Source map integration test', function () {
           .replace(/\s+\/\*# sourceMappingURL=styles.css.map\*\//, '');
         const file2 = fs.readFileSync(path.resolve(destPath, 'styles.processed.css'))
           .toString()
-          .replace(/\s+\/\*# sourceMappingURL=styles.processed.css.map \*\//, '');
+          .replace(/\s+\/\*# sourceMappingURL=styles.processed.css.map\*\//, '');
 
         assert.strictEqual(file1, file2, 'The content of the generated files doesn\'t match');
 
@@ -181,7 +181,7 @@ describe.skip('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.strictEqual(files.length, 10);
+        assert.strictEqual(files.length, 9);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.css.map'), 'Source map for the styles is missing');
         assert(files.some(file => file === 'styles.critical.css'), 'Generated critical styles is missing');
@@ -260,33 +260,29 @@ describe.skip('Source map integration test', function () {
       .then(fs => {
         const files = fs.readdirSync(destPath);
 
-        assert.strictEqual(files.length, 7);
+        assert.strictEqual(files.length, 5);
         assert(files.some(file => file === 'styles.css'), 'Generated styles is missing');
         assert(files.some(file => file === 'styles.critical.css'), 'Generated critical styles is missing');
         assert(files.some(file => file === 'styles.min.css'), 'Optimized styles is missing');
-        assert(files.some(file => file === 'styles.min.css.map'), 'Source map for the optimized styles is missing');
         assert(files.some(file => file === 'styles.critical.min.css'), 'Optimized critical styles is missing');
-        assert(files.some(file => file === 'styles.critical.min.css.map'), 'Source map for the optimized critical styles is missing');
 
         return fs;
       })
-      .then(fs => readMap(fs, 'styles.min.css.map')
-        .then(map => {
-          const sources = map.sources;
+      .then(fs => {
+        const fileNames = [
+          'styles.css',
+          'styles.critical.css',
+          'styles.min.css',
+          'styles.critical.min.css'
+        ]
 
-          assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
-          assert(sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is missing in the source map');
-        })
-        .then(() => fs)
-      )
-      .then(fs => readMap(fs, 'styles.critical.min.css.map')
-        .then(map => {
-          const sources = map.sources;
+        fileNames.forEach(name => {
+          const file = fs.readFileSync(path.resolve(destPath, name));
 
-          assert(sources.some(s => /fixtures\/main\.css$/.test(s)), 'Main styles is missing in the source map');
-          assert(!sources.some(s => /fixtures\/partial\.css$/.test(s)), 'Partial styles is present in the source map');
-        })
-        .then(() => fs)
-      );
+          assert(file.toString().indexOf('/*# sourceMappingURL=data:') > 0, 'It doesn‘t have inline sourcemap');
+        });
+
+        return fs;
+      });
   });
 });
