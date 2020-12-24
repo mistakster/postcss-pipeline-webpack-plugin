@@ -2,19 +2,26 @@ const criticalSplit = require('postcss-critical-split');
 const csso = require('postcss-csso');
 const postcss = require('postcss');
 const PostCssPipelineWebpackPlugin = require('../lib/postcss-pipeline-webpack-plugin');
-const RawSource = require('webpack').sources.RawSource;
+const { RawSource, SourceMapSource } = require('webpack').sources;
 const assert = require('assert');
 const fs = require('fs');
+const path = require('path');
 const nullPlugin = require('./helpers/postcss-null-plugin');
 
 function readFile(name) {
   return new Promise((resolve, reject) => {
-    fs.readFile(name, 'utf8', (err, data) => {
+    fs.readFile(name, 'utf8', (err, sourceData) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve(new RawSource(data));
+        return reject(err);
       }
+
+      fs.readFile(name + '.map', 'utf8', (err, mapData) => {
+        if (err) {
+          return resolve(new RawSource(sourceData));
+        }
+
+        return resolve(new SourceMapSource(sourceData, name, mapData));
+      });
     });
   });
 }
@@ -154,13 +161,17 @@ describe('PostCss Pipeline Webpack Plugin', function () {
 
         assert.deepStrictEqual(keys, [
           './styles.css',
-          './styles.processed.css',
-          './styles.processed.css.map'
+          './styles.processed.css'
         ]);
 
         assert.strictEqual(
           assets[keys[1]].source().toString(),
           '\n/*# sourceMappingURL=styles.processed.css.map */'
+        );
+
+        assert.strictEqual(
+          JSON.stringify(assets[keys[1]].map()),
+          '{"version":3,"sources":[],"names":[],"mappings":"","file":"styles.processed.css"}'
         );
       });
   });
@@ -204,30 +215,19 @@ describe('PostCss Pipeline Webpack Plugin', function () {
           './styles.css',
           './styles.critical.css',
           './styles.min.css',
-          './styles.min.css.map',
-          './styles.critical.min.css',
-          './styles.critical.min.css.map',
+          './styles.critical.min.css'
         ]);
 
-        const fixtures = [
-          './test/fixtures/styles.css',
-          './test/fixtures/styles.critical.css',
-          './test/fixtures/styles.min.css',
-          './test/fixtures/styles.min.css.map',
-          './test/fixtures/styles.critical.min.css',
-          './test/fixtures/styles.critical.min.css.map',
-        ];
+        return Promise.all(keys.map(name => {
+          const asset = assets[name];
+          const expectedSourceName = path.join('./test/fixtures', name);
 
-        return Promise.all(fixtures.map(readFile))
-          .then(files => {
-            files.forEach((file, index) => {
-              assert.strictEqual(
-                assets[keys[index]].source().toString(),
-                files[index].source().toString(),
-                fixtures[index]
-              );
+          return readFile(expectedSourceName)
+            .then(file => {
+              assert.strictEqual(asset.source(), file.source());
+              assert.strictEqual(JSON.stringify(asset.map()), JSON.stringify(file.map()));
             });
-          });
+        }));
       });
   });
 });
