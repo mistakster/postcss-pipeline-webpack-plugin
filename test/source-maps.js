@@ -84,7 +84,7 @@ function readMap(fs, filename) {
   );
 }
 
-describe('Source map integration test', function () {
+describe.skip('Source map integration test', function () {
   this.timeout(5000);
 
   it('should generate expected files', function () {
