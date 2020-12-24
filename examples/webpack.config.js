@@ -8,6 +8,8 @@ const csso = require('postcss-csso');
 module.exports = {
   mode: 'production',
 
+  // devtool: 'source-map',
+
   entry: '../test/fixtures/main.css',
 
   output: {
