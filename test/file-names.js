@@ -69,16 +69,6 @@ function buildConfig(plugins, options) {
   }, options);
 }
 
-function readMap(fs, filename) {
-  return Promise.resolve(
-    JSON.parse(
-      fs.readFileSync(
-        path.resolve(destPath, filename)
-      ).toString()
-    )
-  );
-}
-
 describe('File name integration test', function () {
   this.timeout(5000);
 
