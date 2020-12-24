@@ -18,9 +18,13 @@ npm install --save postcss-pipeline-webpack-plugin
 
 ## Compatibility
 
-It requires webpack 4.x to work. For webpack 3.x use [postcss-pipeline-webpack-plugin@3] package.
+It requires webpack 5.x to work.
 
-The plugin is compatible with both PostCSS 6.x and 7.x branches.
+For webpack 4.x use [postcss-pipeline-webpack-plugin@5] package.
+
+For webpack 3.x use [postcss-pipeline-webpack-plugin@3] package.
+
+The plugin is compatible with PostCSS 6.x, 7.x and 8.x branches.
 
 ## Usage
 
@@ -160,6 +164,12 @@ See full [webpack.config.js](./examples/webpack.config.js) for more details.
 
 ## Change log
 
+### 6.0.0
+
+> 2020-12-24
+
+- *[breaking]* made the plugin fully compatible with webpack v5  
+
 ### 5.1.2
 
 > 2019-08-02
@@ -261,4 +271,5 @@ ISC
 [webpack]: https://webpack.js.org
 [postcss-critical-css]: https://medium.com/@nocreativity/manage-your-critical-css-with-this-postcss-plugin-6be1ca226c06#.abnvj11p7
 [csso]: https://github.com/css/csso
+[postcss-pipeline-webpack-plugin@5]: https://www.npmjs.com/package/postcss-pipeline-webpack-plugin/v/5.1.2
 [postcss-pipeline-webpack-plugin@3]: https://www.npmjs.com/package/postcss-pipeline-webpack-plugin/v/3.1.0
